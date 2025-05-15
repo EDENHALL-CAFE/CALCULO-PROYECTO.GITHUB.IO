@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proyecto Cálculo Diferencial</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #e8f0ff, #fdfdfd);
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header img {
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      color: #003366;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+      text-shadow: 1px 1px 2px #ccc;
+    }
+
+    h2 {
+      color: #000000;
+      margin-bottom: 15px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      background-color: #0055aa;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s;
+      display: block;
+      margin: 0 auto 15px;
+    }
+
+    button:hover {
+      background-color: #0077cc;
+      transform: scale(1.05);
+    }
+
+    .content {
+      display: none;
+      margin-top: 15px;
+      font-size: 1.05em;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #simulador {
+      position: relative;
+      border: 2px dashed #0055aa;
+      margin: 30px 0;
+      overflow: auto;
+      background: linear-gradient(to top, #ffffff 60%, #cce6ff 100%);
+    }
+
+    #info {
+      margin-top: 10px;
+      padding: 10px;
+      background: #eef5ff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-size: 1em;
+      color: #003366;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Proyecto Cálculo Diferencial</h1>
+    <img src="img/tas.png" alt="Logo USB">
+    <h2>JHON JAIRO MONTEALEGRE BASTOS</h2>
+    <h2>GEYSEE STHEPHANY BETANCOURT GARCIA</h2>
+    <h2>SEBASTIAN SILVA BAUTISTA</h2>
+  </header>
+
+  <div class="container">
+     <div class="section">
+      <h2>Introducción</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>El estudio de funciones polinómicas mediante el cálculo diferencial permite comprender su comportamiento gráfico y algebraico. Este proyecto tiene como propósito analizar tres funciones aplicando herramientas del cálculo diferencial, como derivadas primera y segunda, para identificar puntos críticos, intervalos de crecimiento y decrecimiento, concavidad y puntos de inflexión. Se simula el lanzamiento de un cohete para interpretar los resultados matemáticos en un contexto físico real.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Objetivos</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>1. Aplicar las reglas de derivación para analizar el comportamiento de funciones polinómicas.</p>
+        <p>2. Determinar puntos críticos, intervalos de crecimiento y decrecimiento, concavidad y puntos de inflexión.</p>
+        <p>3. Interpretar los resultados en el contexto físico de la trayectoria de un cohete.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Problema Inicial</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>Se desea analizar el comportamiento de funciones que modelan el movimiento de un cohete en el aire. A partir de estas funciones, se busca determinar puntos críticos, intervalos de crecimiento y decrecimiento, puntos de inflexión y concavidad. Además, se pretende encontrar el ángulo de lanzamiento óptimo, la altura máxima alcanzada, la distancia horizontal máxima y el tiempo de vuelo.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Metodología</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>Se seleccionaron funciones polinómicas representativas. A cada función se le aplicó la primera derivada para hallar puntos críticos y determinar crecimiento/decrecimiento. Posteriormente, se usó la segunda derivada para encontrar puntos de inflexión y concavidad. Se interpretaron los resultados matemáticos en un contexto físico real. Finalmente, se compararon los resultados con entregas anteriores para obtener conclusiones más completas.</p>
+      </div>
+    </div>
+
+    <!-- ANÁLISIS DE FUNCIONES -->
+    <div class="section">
+      <h2>Análisis de f(x) = x⁴ - 6x³ - 7x² + 48x - 36</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+       <img src="img/punto01.png" alt="Interpretación Física" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Análisis de g(x) = -2x³ + 12x² - 18x + 5</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+         <img src="img/punto1.png" alt="Interpretación Física" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Análisis de h(d) = -0.5d² + 6d</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <img src="img/punto0.2.png" alt="Interpretación Física" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Interpretación Física</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+         <img src="img/punto3.png" alt="Interpretación Física" style="width: 100%; max-width: 600px; margin: 20px auto; display: block;">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Conclusiones</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>El cálculo diferencial permite analizar funciones que modelan fenómenos reales como la trayectoria de un cohete. A través de las derivadas, se identificaron comportamientos clave como puntos críticos, máximos, mínimos, concavidad y tiempo de vuelo. La comparación con entregas anteriores muestra cómo se puede refinar y ampliar un modelo matemático aplicado.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Referencias</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>Giancoli, Douglas C. <em>Física: Principios con aplicaciones</em>. 6ª ed. México: Pearson Educación, 2005.</p>
+        <p>Serway, Raymond A., y John W. Jewett. <em>Física para ciencias e ingeniería</em>. Vol. 1. México: Cengage Learning, 2011.</p>
+        <p>Stewart, James. <em>Cálculo de una variable</em>. 7ª ed. México: Cengage Learning, 2015.</p>
+        <p>Larson, Ron, y Bruce H. Edwards. <em>Cálculo: Trascendentes tempranas</em>. 7ª ed. México: Cengage Learning, 2014.</p>
+        <p>Lamar University. “Paul’s Online Math Notes: Curve Sketching.” https://tutorial.math.lamar.edu</p>
+      </div>
+    </div>
+    <div class="section">
+      <h2>Simulación del Lanzamiento del Cohete</h2>
+      <button onclick="toggleContent(this)">Mostrar contenido</button>
+      <div class="content">
+        <p>En esta sección se representa de forma animada la trayectoria del cohete con una curva parabólica. Al iniciar la simulación, se reproduce un sonido y se muestra una línea que sigue el trayecto junto con información útil.</p>
+        <div id="simulador">
+          <canvas id="canvasSim" width="800" height="300"></canvas>
+        </div>
+        <div id="info">
+          <p><strong>Velocidad:</strong> <span id="velocidad">0</span> m/s</p>
+          <p><strong>Altura Máxima:</strong> <span id="maxAltura">0</span> m</p>
+          <p><strong>Coordenadas:</strong> (<span id="x">0</span>, <span id="y">0</span>)</p>
+        </div>
+        <button onclick="lanzarCohete()">Iniciar simulación</button>
+        <audio id="audioLanzamiento" src="audio/lanzamiento.mp3" preload="auto"></audio>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleContent(button) {
+      const content = button.nextElementSibling;
+      content.style.display = content.style.display === "block" ? "none" : "block";
+      button.textContent = content.style.display === "block" ? "Ocultar contenido" : "Mostrar contenido";
+    }
+
+    function lanzarCohete() {
+      const canvas = document.getElementById("canvasSim");
+      const ctx = canvas.getContext("2d");
+      const audio = document.getElementById("audioLanzamiento");
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const v0 = 100;
+      const angleDegrees = parseFloat(prompt("Ingrese el ángulo de lanzamiento (grados):", "45")) || 45;
+      const angle = angleDegrees * Math.PI / 180;
+      const g = 9.8;
+
+      const startX = 0;
+      const startY = canvas.height - 10;
+
+      const v0x = v0 * Math.cos(angle);
+      const v0y = v0 * Math.sin(angle);
+      const tTotal = (2 * v0y) / g;
+
+      const trayectoria = [];
+      let maxY = startY;
+      let maxX = startX;
+
+      const coheteImg = new Image();
+      coheteImg.onload = () => {
+        const startTime = performance.now();
+        audio.currentTime = 0;
+        audio.play();
+
+        function drawFrame(now) {
+          const t = (now - startTime) / 1000;
+          if (t > tTotal) return;
+
+          const x = startX + v0x * t;
+          const y = startY - (v0y * t - 0.5 * g * t * t);
+
+          if (y < maxY) maxY = y;
+          if (x > maxX) maxX = x;
+
+          if (x > canvas.width - 50) {
+  canvas.width = Math.ceil(x + 50);
+}
+
+          trayectoria.push({ x, y });
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          ctx.beginPath();
+          ctx.moveTo(trayectoria[0].x, trayectoria[0].y);
+          for (let i = 1; i < trayectoria.length; i++) {
+            ctx.lineTo(trayectoria[i].x, trayectoria[i].y);
+          }
+          ctx.strokeStyle = "#0077cc";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.drawImage(coheteImg, x - 20, y - 20, 40, 40);
+
+          document.getElementById("velocidad").textContent = Math.sqrt(v0x * v0x + (v0y - g * t) * (v0y - g * t)).toFixed(2);
+          document.getElementById("x").textContent = x.toFixed(1);
+          document.getElementById("y").textContent = y.toFixed(1);
+          document.getElementById("maxAltura").textContent = (canvas.height - maxY).toFixed(1);
+
+          requestAnimationFrame(drawFrame);
+        }
+
+        requestAnimationFrame(drawFrame);
+      };
+
+      coheteImg.src = "img/cohet.png";
+    }
+  </script>
+</body>
+</html>
+
